@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
@@ -853,7 +855,7 @@ public class CameraPlugin implements MethodCallHandler {
                 planes.add(planeBuffer);
               }
               
-              ByteBuffer buffer = image.getPlanes()[0].getBuffer();
+              ByteBuffer buffer = img.getPlanes()[0].getBuffer();
               byte[] bytes = new byte[buffer.capacity()];
               buffer.get(bytes);
               Bitmap bitmapImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
