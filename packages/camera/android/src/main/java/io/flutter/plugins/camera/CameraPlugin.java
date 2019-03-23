@@ -852,12 +852,18 @@ public class CameraPlugin implements MethodCallHandler {
 
                 planes.add(planeBuffer);
               }
+              
+              ByteBuffer buffer = image.getPlanes()[0].getBuffer();
+              byte[] bytes = new byte[buffer.capacity()];
+              buffer.get(bytes);
+              Bitmap bitmapImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
 
               Map<String, Object> imageBuffer = new HashMap<>();
               imageBuffer.put("width", img.getWidth());
               imageBuffer.put("height", img.getHeight());
               imageBuffer.put("format", img.getFormat());
               imageBuffer.put("planes", planes);
+              imageBuffer.put("bitmap", bitmapImage);
 
               eventSink.success(imageBuffer);
               img.close();
